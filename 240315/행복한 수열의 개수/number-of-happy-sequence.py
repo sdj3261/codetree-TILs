@@ -3,6 +3,7 @@ def count_seq(arr,m) :
     max_ret = 0
     if len(arr) < 2 :
         return
+
     for i in range(len(arr)-1) :
         if ret == 0 and arr[i] == arr[i+1] :
             ret += 2
@@ -34,9 +35,13 @@ transposed_matrix = list(map(list, zip(*arr)))
 for i in range(n) :
     data = arr[i]
     data2 = transposed_matrix[i]
-    if count_seq(data,m) :
-        ret += 1
-    if count_seq(data2,m) :
-        ret += 1
+    
+    if m==1 :
+        ret += n
+    else :
+        if count_seq(data,m) :
+            ret += 1
+        if count_seq(data2,m) :
+            ret += 1
         
 print(ret)
