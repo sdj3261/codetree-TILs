@@ -1,48 +1,23 @@
-def count_seq(arr,m) :
+def count_seq(arr, m):
     ret = 0
     max_ret = 0
-
-    if len(arr) < 2 :
-        return
-
-    for i in range(len(arr)-1) :
-        if ret == 0 and arr[i] == arr[i+1] :
-            ret += 2
-        elif arr[i] == arr[i+1] :
-            ret += 1
-        else :
+    for i in range(len(arr) - 1):
+        if arr[i] == arr[i + 1]:
+            ret = ret + 2 if ret == 0 else ret + 1
+        else:
             ret = 0
-        max_ret = max(max_ret,ret)
-
+        max_ret = max(max_ret, ret)
     return max_ret >= m
 
+n, m = map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(n)]
 
-
-
-
-n,m = map(int,input().split())
-arr = []
-if n == 1 :
-    ret = 1
-else :
+if m == 1:
+    print(2 * n)  # 각 행과 각 열 모두 최소 1의 길이를 가지므로, 2*n이 정답입니다.
+else:
     ret = 0
-
-for i in range(n) :
-    data = list(map(int,input().split()))
-    arr.append(data) 
-
-transposed_matrix = list(map(list, zip(*arr)))
-
-for i in range(n) :
-    data = arr[i]
-    data2 = transposed_matrix[i]
-    
-    if m==1 :
-        ret = 2 * n
-    else :
-        if count_seq(data,m) :
+    transposed_matrix = list(map(list, zip(*arr)))
+    for data in arr + transposed_matrix:
+        if count_seq(data, m):
             ret += 1
-        if count_seq(data2,m) :
-            ret += 1
-        
-print(ret)
+    print(ret)
