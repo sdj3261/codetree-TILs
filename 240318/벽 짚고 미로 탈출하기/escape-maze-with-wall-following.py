@@ -28,15 +28,12 @@ def directionToMove(direction) :
     elif direction == 'U' :
         return (-1,0)
 
-def dfs(arr,y,x,direction,visited,cnt) :
-        # 범위를 벗어나는 경우나 종료 조건을 만족하는 경우
+def dfs(arr, y, x, direction, visited, cnt):
     if not in_range(y, x) or arr[y][x] == '0':
         return cnt + 1  # 탐색 성공
 
-    # 이미 방문한 경우
     if visited[y][x][directions.index(direction)]:
-        print(-1)
-        return True  # 이 경우도 종료 조건이므로 True 반환
+        return -1  # 이미 방문했으므로 탐색 실패
 
     visited[y][x][directions.index(direction)] = True
     move = directionToMove(direction)
@@ -44,18 +41,16 @@ def dfs(arr,y,x,direction,visited,cnt) :
     ny = y + move[0]
     nx = x + move[1]
 
-    if not in_range(y, x) or ny == 0 or nx == 0:
-        print(cnt + 1)
-        return True  # 특정 조건을 만족하여 종료하는 경우 True 반환
+    if not in_range(ny, nx) or arr[ny][nx] == '0':
+        return cnt + 1  # 탐색 성공
 
-    if arr[ny][nx] == '#' :
-        dfs(arr,y,x,directions[directions.index(direction)-1],visited,cnt)
+    if arr[ny][nx] == '#':
+        # 현재 방향에서 오른쪽 벽을 확인 후 방향 전환
+        return dfs(arr, y, x, directions[(directions.index(direction) - 1) % 4], visited, cnt)
 
-    if visited[ny][nx][directions.index(direction)] == False or arr[ny][nx] == '.' :
-        if checkRightWalls(arr,ny,nx,direction) :
-            dfs(arr,ny,nx,directions[directions.index(direction)+1],visited,cnt+1)
-        else :
-            dfs(arr,ny,nx,directions[directions.index(direction)],visited,cnt+1)
+    # 오른쪽 벽이 있다면 방향을 전환하고, 없다면 현재 방향을 유지
+    next_direction = directions[(directions.index(direction) + 1) % 4] if checkRightWalls(arr, ny, nx, direction) else direction
+    return dfs(arr, ny, nx, next_direction, visited, cnt + 1)
 
 
 n = int(input())
@@ -74,5 +69,4 @@ for i in range(1, n+1):
     for j in range(1, n+1):
         expanded_arr[i][j] = arr[i-1][j-1]
 
-if dfs(expanded_arr,r,c,'R',visited,0) :
-    pass
+print(dfs(expanded_arr,r,c,'R',visited,1))
