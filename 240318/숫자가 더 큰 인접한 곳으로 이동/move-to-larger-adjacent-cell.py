@@ -5,7 +5,7 @@ def in_range(r,c) :
 
 def simulate(arr,r,c,visited) :
     visited[r][c] = True
-    dys = [1,-1,0,0]
+    dys = [-1,1,0,0]
     dxs = [0,0,-1,1]
 
     for dy,dx in zip(dys,dxs) :
