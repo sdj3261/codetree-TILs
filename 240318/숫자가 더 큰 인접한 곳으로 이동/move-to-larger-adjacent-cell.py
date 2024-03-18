@@ -12,7 +12,7 @@ def simulate(arr,r,c,visited) :
         ny = dy + r
         nx = dx + c
 
-        if visited[ny][nx] == True or in_range(ny,nx) == False or arr[ny][nx] <= arr[r][c] :
+        if in_range(ny,nx) == False or visited[ny][nx] == True or arr[ny][nx] <= arr[r][c] :
             continue
         if visited[ny][nx] == False and in_range(ny,nx) and arr[ny][nx] > arr[r][c] :
             print(arr[ny][nx], end = ' ')
