@@ -1,3 +1,6 @@
+import sys
+# 재귀 호출의 최대 깊이를 10000으로 설정
+sys.setrecursionlimit(10000)
 directions = ['R','D','L','U']
 
 def checkRightWalls(arr,y,x,direction) :
@@ -13,7 +16,7 @@ def checkRightWalls(arr,y,x,direction) :
 
 
 def in_range(y,x) :
-    if y >= 0 and y <=n and x >=0 and x <=n :
+    if y >= 1 and y <=n+1 and x >=1 and x <=n+1 :
         return True
     else :
         return False
@@ -28,9 +31,9 @@ def directionToMove(direction) :
     elif direction == 'U' :
         return (-1,0)
 
-def dfs(arr, y, x, direction, visited, cnt):
-    if not in_range(y, x) or arr[y][x] == '0':
-        return cnt + 1  # 탐색 성공
+def dfs(arr, y, x, direction, visited, cnt) :
+    if not in_range(y, x) or arr[y][x] == 0:
+        return cnt
 
     if visited[y][x][directions.index(direction)]:
         return -1  # 이미 방문했으므로 탐색 실패
@@ -41,28 +44,28 @@ def dfs(arr, y, x, direction, visited, cnt):
     ny = y + move[0]
     nx = x + move[1]
 
-    if not in_range(ny, nx) or arr[ny][nx] == '0':
-        return cnt + 1  # 탐색 성공
+    if not in_range(ny, nx) or arr[ny][nx] == 0:
+        return cnt + 1
 
     if arr[ny][nx] == '#':
         # 현재 방향에서 오른쪽 벽을 확인 후 왼쪽 90도로 방향 전환
-        return dfs(arr, y, x, directions[(directions.index(direction) - 1) % 4], visited, cnt)
+        return dfs(arr, y, x, directions[(directions.index(direction) - 1)], visited, cnt)
     
-    if arr[ny][nx] == 0 :
+    if arr[ny][nx] == '0' :
         return dfs(arr, ny, nx, direction, visited, cnt)
 
     # 한칸 이동했을때 오른쪽 벽이 있다면 해당 방향으로 이동
     if checkRightWalls(arr, ny, nx, direction) :
         next_direction = direction
     else :
-        next_direction = directions[(directions.index(direction) + 1) % 4]
+        next_direction = directions[(directions.index(direction) + 1)]
     return dfs(arr, ny, nx, next_direction, visited, cnt + 1)
 
 n = int(input())
 r,c = map(int,input().split())
 rightWall = False
 
-visited = [[[False for _ in range(4)]for _ in range(n+2)] for _ in range(n+2)]
+visited = [[[False for _ in range(4)] for _ in range(n+2)] for _ in range(n+2)]
 p = [r,c,directions[0],rightWall]
 
 expanded_arr = [[0 for _ in range(n+2)] for _ in range(n+2)]
