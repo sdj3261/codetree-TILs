@@ -13,7 +13,7 @@ def checkRightWalls(arr,y,x,direction) :
 
 
 def in_range(y,x) :
-    if y >= 0 and y <n and x >=0 and x <n :
+    if y >= 0 and y <=n and x >=0 and x <=n :
         return True
     else :
         return False
