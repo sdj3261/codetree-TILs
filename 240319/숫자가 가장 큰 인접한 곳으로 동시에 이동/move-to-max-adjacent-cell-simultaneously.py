@@ -18,7 +18,7 @@ def dfs(arr,marble,t) :
     
     for my,mx in marble :
         cnt = -1
-        marble_pos = None
+        max_marble = None
         for dy,dx in zip(dys,dxs) :
             cnt+=1
             ny = my + dy
@@ -26,11 +26,13 @@ def dfs(arr,marble,t) :
             
             if in_range(arr,ny,nx) == False:
                 continue
-            if marble_pos is None :
-                marble_pos = arr[ny][nx]
+
+            if max_marble is None :
+                max_marble = arr[ny][nx]
                 p = (ny,nx)
-            if marble_pos < arr[ny][nx] :
-                marble_pos = arr[ny][nx]
+                
+            if max_marble < arr[ny][nx] :
+                max_marble = arr[ny][nx]
                 p = (ny,nx)
         if cnt == 3 :
             if p in mp :
