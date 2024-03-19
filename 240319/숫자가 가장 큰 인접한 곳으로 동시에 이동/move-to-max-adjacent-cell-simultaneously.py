@@ -1,5 +1,6 @@
 import sys
 sys.setrecursionlimit(10 ** 5)
+
 def in_range(arr,y,x) :
     if 0<=y<=len(arr)-1 and 0<=x<=len(arr[0])-1 :
         return True
@@ -8,12 +9,12 @@ def in_range(arr,y,x) :
 def dfs(arr,marble,t) :
     dys = [-1,1,0,0]
     dxs = [0,0,-1,1]
-
+    mp = dict()
     next_marble_pos = []
 
     if t == 0 :
         print(len(marble))
-        return
+        return 
     
     for my,mx in marble :
         cnt = -1
@@ -29,10 +30,18 @@ def dfs(arr,marble,t) :
                 marble_pos = arr[ny][nx]
                 p = (ny,nx)
             if marble_pos < arr[ny][nx] :
+                marble_pos = arr[ny][nx]
                 p = (ny,nx)
         if cnt == 3 :
-            next_marble_pos.append(p)
-    next_marble_pos = set(next_marble_pos)
+            if p in mp :
+                mp[p] += 1
+            else :
+                mp[p] = 1
+
+    for key,value in mp.items() :
+        if value == 1 :
+            next_marble_pos.append(key)
+        
     dfs(arr,next_marble_pos,t-1)
 
         
