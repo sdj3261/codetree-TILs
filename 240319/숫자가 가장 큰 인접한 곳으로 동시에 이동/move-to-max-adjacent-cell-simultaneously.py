@@ -1,3 +1,5 @@
+import sys
+sys.setrecursionlimit(10 ** 6)
 def in_range(arr,y,x) :
     if 0<=y<=len(arr)-1 and 0<=x<=len(arr[0])-1 :
         return True
