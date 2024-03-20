@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10 ** 4)
+sys.setrecursionlimit(10 ** 5)
 def checkSeqThree(arr) :
     i = 0
     cnt = 1
@@ -16,7 +16,7 @@ def checkSeqThree(arr) :
 def conditionCombi(arr,n,k) :
     if n == 0 and not checkSeqThree(arr) :
         print(*arr)
-        return
+        return 
     for i in range(1,k+1) :
         arr.append(i)
         conditionCombi(arr,n-1,k)
