@@ -1,5 +1,3 @@
-import sys
-sys.setrecursionlimit(10**5)
 global cnt 
 def is_beautiful(arr):
     s = ""
