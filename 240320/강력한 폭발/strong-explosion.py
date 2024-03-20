@@ -31,8 +31,7 @@ def dfs(arr,y,x,visited,num) :
 def combi(indexs,num) :
     if num == 0 :
         global selectBomb
-        y, x = indexs
-        selectBomb.append((y,x))
+        selectBomb.append(tuple(indexs))
         return 
     for i in range(1,4) :
         indexs.append(i)
@@ -51,7 +50,7 @@ for i in range(n) :
     for j in range(n) :
         if arr[i][j] == 1 :
             bombCnt +=1
-if bombCnt != 1 :            
+if bombCnt >= 1 :            
     combi(indexs,bombCnt)
 else : 
     selectBomb = [(1,),(2,),(3,)]
