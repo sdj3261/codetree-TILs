@@ -24,7 +24,7 @@ def dfs(arr,y,x,visited,num) :
     for dy,dx in zip(dys,dxs) :
         ny = dy + y
         nx = dx + x
-        if in_range(arr,ny,nx) == False or visited[ny][nx] == True:
+        if in_range(arr,ny,nx) == False or arr[ny][nx] == 1 :
             continue
         visited[ny][nx] = True
 
