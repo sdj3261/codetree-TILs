@@ -1,6 +1,5 @@
 global cnt 
 def is_beautiful(arr):
-    s = "".join(map(str,arr))
     i = 0
     while i < len(s) :
         length = int(s[i])
