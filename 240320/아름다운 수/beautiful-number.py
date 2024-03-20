@@ -20,7 +20,7 @@ def generateNumberNdigit(s,n) :
     for i in nums:
         s+=i
         generateNumberNdigit(s,n-1)
-        s = s[:len(s)-1]
+        s = s[:-1]
 
 
 #n은 자릿수
