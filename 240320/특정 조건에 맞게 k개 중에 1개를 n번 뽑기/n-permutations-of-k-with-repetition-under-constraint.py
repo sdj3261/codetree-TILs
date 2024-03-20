@@ -1,5 +1,5 @@
 import sys
-sys.recursionlimit(10 ** 3)
+sys.setrecursionlimit(10 ** 3)
 def checkSeqThree(arr) :
     i = 0
     cnt = 1
