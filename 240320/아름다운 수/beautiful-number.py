@@ -1,16 +1,13 @@
 global cnt 
 def is_beautiful(arr):
-    s = ""
-    for i in arr :
-        s+=str(i)
+    s = "".join(map(str,arr))
     i = 0
     while i < len(s) :
         length = int(s[i])
-        if s[i:i+length] == s[i] * length :
-            i = i+length
-            pass
-        else :
+        if s[i:i+length] != s[i] * length :
             return False
+        else :
+            i = i+length
     return True
 
 def generateNumberNdigit(arr,n) :
@@ -19,8 +16,7 @@ def generateNumberNdigit(arr,n) :
             global cnt
             cnt += 1
             return
-        else :
-            return
+        return
     for i in range(1, 5):
         arr.append(i)
         generateNumberNdigit(arr,n-1)
