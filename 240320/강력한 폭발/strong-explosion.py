@@ -47,6 +47,13 @@ for i in range(n) :
 bombCnt = 0
 indexs = []
 
+if n == 1 :
+    if arr[0][0] == 1 :
+        print(1)
+    else :
+        print(0)
+    sys.exit(0)
+
 for i in range(n) : 
     for j in range(n) :
         if arr[i][j] == 1 :
