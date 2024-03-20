@@ -1,5 +1,5 @@
 global cnt 
-nums = ['1','2','3','4','5']
+nums = ['1','2','3','4']
 def is_beautiful(s):
     i = 0
     while i < len(s) :
