@@ -24,21 +24,28 @@ def in_range(y,x) :
     else :
         return False 
 
-def dfs(arr,y,x,directionNum,ret,cnt) :
-    global max_ret
-    max_ret = max(ret,max_ret)
+def calculatePos(arr,y,x,directionNum) :
+    result = []
     dy,dx = next_pos[directionNum-1]
 
-    if not in_range(y,x) :
-        return
-    if cnt == n :
-        return
     for i in range(1,n) :
         ny = y + dy * i
         nx = x + dx * i 
         if not in_range(ny,nx) or arr[y][x] >= arr[ny][nx] :
             continue
-        dfs(arr,ny,nx,direction[ny][nx],ret + 1,cnt+1)
+        result.append((ny,nx))
+    return result
 
-dfs(arr,r,c,direction[r][c],0,1)
+def dfs(arr,y,x,directionNum,ret) :
+    #1턴마다 모든 조합 경우의 수 max_Ret 구하기
+    global max_ret
+    max_ret = max(max_ret, ret) 
+    pos_data = calculatePos(arr,y,x,directionNum)
+    if len(pos_data) == 0 :
+        return
+
+    for posy,posx in pos_data :
+        dfs(arr,posy,posx,direction[posy][posx],ret+1)   
+
+dfs(arr,r,c,direction[r][c],0)
 print(max_ret)
