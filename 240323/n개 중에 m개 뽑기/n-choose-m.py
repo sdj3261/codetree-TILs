@@ -11,4 +11,4 @@ def combi(n,m,cnt,idx) :
         arr.pop()
     
 
-combi(3,2,0,1)
+combi(n,m,0,1)
