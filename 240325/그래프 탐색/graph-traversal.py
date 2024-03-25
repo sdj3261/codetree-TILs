@@ -27,6 +27,7 @@ while q :
         if not visited[v] :
             q.append(v)
             visited[curr] = True
-            ret.add(curr)
 
+if 1 in ret :
+    ret = ret - 1
 print(len(ret))
