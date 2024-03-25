@@ -2,18 +2,16 @@ import copy
 max_ret = 0
 
 def calculateXOR(nums) :
-    newNums = copy.deepcopy(nums)
-    
     #xor 연산시작
-    newNums[1] = newNums[1] ^ newNums[0]
+    nums[1] = nums[1] ^ nums[0]
 
     if len(nums) <= 2 :
-        return newNums[1]
+        return nums[1]
 
-    for i in range(2,len(newNums)) :
-        newNums[i] ^= newNums[i-1]
+    for i in range(2,len(nums)) :
+        nums[i] ^= nums[i-1]
         
-    return newNums[-1]
+    return nums[-1]
 
 n,m = map(int,input().split())
 
