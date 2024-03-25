@@ -8,26 +8,23 @@ for i in range(n) :
     arr.append(list(map(int,input().split())))
 
 
-def dfs(k,cnt,n) :
+def dfs(k,n,row) :
     global max_ret
-    sums = 0
-    for y,x in k : 
-        sums += arr[y][x]
-
-    if cnt == n :
+    if row == n :
+        sums = 0
+        for y,x in k :
+            sums += arr[y][x]
         max_ret = max(max_ret,sums)
         return
+        
     for i in range(n) :
-        for j in range(n) :
-            if not row_visited[i] and not col_visited[j] :
-                k.append((i,j))
-                row_visited[i] = True
-                col_visited[j] = True
-                dfs(k,cnt+1,n)
-                k.pop()
-                row_visited[i] = False
-                col_visited[j] = False
+        if not col_visited[i] :
+            k.append((row,i))
+            col_visited[i] = True
+            dfs(k,n,row+1)
+            k.pop()
+            col_visited[i] = False
 
 k = []
-dfs(k,0,n)
+dfs(k,n,0)
 print(max_ret)
