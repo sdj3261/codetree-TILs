@@ -1,40 +1,24 @@
-n,m = map(int,input().split())
+n, m = map(int, input().split())
 tree = {}
-visited = [False for _ in range(n+1)]
-q = []
-ret = set()
-ret.add(1)
+visited = [False] * (n + 1)
+q = [1]
+visited[1] = True
+result = 0
 
-for i in range(m) :
-    s,e = map(int,input().split())
+for _ in range(m):
+    s, e = map(int, input().split())
+    # s와 e 노드를 tree에 양방향으로 추가하는 과정 간소화
+    tree.setdefault(s, []).append(e)
+    tree.setdefault(e, []).append(s)
 
-    if s in tree :
-        tree[s].append(e)
-    if s not in tree :
-        tree[s] = [e]
+while q:
+    curr = q.pop(0)  # 큐의 첫 번째 요소를 제거하여 현재 노드로 설정
+    result += 1  # 방문한 노드의 수를 증가
 
-    if e in tree :
-        tree[e].append(s)
-    if e not in tree :
-        tree[e] = [s]
+    for v in tree.get(curr, []):  # curr에서 이동할 수 있는 모든 노드 v에 대해
+        if not visited[v]:  # 아직 방문하지 않은 노드라면
+            visited[v] = True  # 방문 처리
+            q.append(v)  # 큐에 추가
 
-if tree and 1 in tree :
-    q.append(1)
-    visited[1] = True
-
-while q :
-    curr = q.pop()
-
-    for v in tree[curr] :
-        if not visited[v] :
-            ret.add(v)
-            q.append(v)
-            visited[curr] = True
-
-if 1 in ret :
-    result = len(ret) - 1
-else :
-    result = len(ret)
-    
-
-print(result)
+# 1번 노드 자체를 제외하고 연결된 노드의 수를 계산하기 때문에 -1을 해줍니다.
+print(result - 1)
