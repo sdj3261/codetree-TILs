@@ -25,9 +25,14 @@ while q :
 
     for v in tree[curr] :
         if not visited[v] :
+            ret.add(v)
             q.append(v)
             visited[curr] = True
 
 if 1 in ret :
-    ret = ret - 1
-print(len(ret))
+    result = len(ret) - 1
+else :
+    result = len(ret)
+    
+
+print(result)
