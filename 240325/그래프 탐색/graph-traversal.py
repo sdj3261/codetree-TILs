@@ -18,7 +18,7 @@ for i in range(m) :
     if e not in tree :
         tree[e] = [s]
 
-if tree :
+if tree and 1 in tree :
     q.append(1)
     visited[1] = True
 
