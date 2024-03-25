@@ -1,36 +1,34 @@
-import copy
 max_ret = 0
+memo = {}  # XOR 연산 결과를 저장할 메모
 
-def calculateXOR(nums) :
-    #xor 연산시작
-    nums[1] = nums[1] ^ nums[0]
+def calculateXOR(nums):
+    # 리스트를 튜플로 변환하여 딕셔너리의 키로 사용
+    num_tuple = tuple(nums)
+    if num_tuple in memo:
+        return memo[num_tuple]
 
-    if len(nums) <= 2 :
-        return nums[1]
+    result = nums[0]
+    for num in nums[1:]:
+        result ^= num
+    
+    memo[num_tuple] = result
+    return result
 
-    for i in range(2,len(nums)) :
-        nums[i] ^= nums[i-1]
-        
-    return nums[-1]
+n, m = map(int, input().split())
+arr = list(map(int, input().split()))
 
-n,m = map(int,input().split())
-
-arr = list(map(int,input().split()))
-
-def combi(data,cnt,idx) :
+def combi(data, cnt, idx):
     global max_ret
-    if cnt == m :
+    if cnt == m:
         max_ret = max(max_ret, calculateXOR(data))
         return 
-    for i in range(idx,n) :
+    for i in range(idx, n):
         data.append(arr[i])
-        combi(data,cnt+1,idx+1)
+        combi(data, cnt+1, i+1)
         data.pop()
 
-k = []
-
-if m== 1 :
+if m == 1:
     print(max(arr))
-else : 
-    combi(k,0,0)
+else:
+    combi([], 0, 0)
     print(max_ret)
