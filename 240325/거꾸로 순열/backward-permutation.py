@@ -7,7 +7,7 @@ def dfs(arr,n,visited,cnt) :
         for i in arr :
             ret.append(i)
         return
-    for i in range(3,0,-1) :
+    for i in range(n,0,-1) :
         if not visited[i] :
             arr.append(i)
             visited[i] = True
