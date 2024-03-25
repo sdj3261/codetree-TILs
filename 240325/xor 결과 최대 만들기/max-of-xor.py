@@ -82,7 +82,7 @@ def combi(data,cnt,idx) :
 k = []
 
 if m== 1 :
-    print(0)
+    print(max(arr))
 else : 
     combi(k,0,0)
     print(max_ret)
