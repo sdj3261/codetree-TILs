@@ -18,8 +18,10 @@ for i in range(m) :
     if e not in tree :
         tree[e] = [s]
 
-q = [1]
-visited[1] = True
+if tree :
+    q.append(1)
+    visited[1] = True
+
 while q :
     curr = q.pop()
 
