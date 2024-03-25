@@ -3,9 +3,7 @@ max_ret = 0
 def digitToNum(digit) :
     k = 1
     ret = 0
-    for i in digit[::-1] : 
-        if i == '0' :
-            continue
+    for i in digit[::-1] :
         ret += k * int(i)
         k = k * 2
     return ret 
