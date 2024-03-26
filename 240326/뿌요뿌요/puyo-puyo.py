@@ -30,15 +30,26 @@ def dfs(y,x,block,visited) :
     max_ret = max(max_ret,block)
 
 tCount = 0 
+bCnt = 0
+visited = [[False for _ in range(n)] for _ in range(n)]
+boom = [[False for _ in range(n)] for _ in range(n)]
+
 for i in range(n) :
     for j in range(n) :
+        if boom[i][j] :
+            continue
         visited = [[False for _ in range(n)] for _ in range(n)]
         dfs(i,j,0,visited)
         tCount = 0
+        
         for k in range(n) :
             for m in range(n) :
-                if visited[k][m] == True :
+                if visited[k][m] :
                     tCount += 1
                     max_ret = max(tCount,max_ret)
+        if tCount >= 4 :
+            boom = visited
+            bCnt += 1
+
                                                                          
-print(max_ret//4, max_ret)
+print(bCnt, max_ret)
