@@ -4,19 +4,26 @@ city = []
 max_ret = 0
 dys = [-1,0,1,0]
 dxs = [0,1,0,-1]
-def combi(arr, cnt, k, visited):
+
+def combi(idx, arr, cnt, k, visited):
     if cnt == k:
         city.append(list(arr))
         return
+    if idx >= n * n:  # 모든 위치를 확인했다면 재귀 종료
+        return
+
+    i, j = divmod(idx, n)  # 일렬로 된 인덱스를 이용해 행과 열 계산
+
+    # 현재 위치를 선택하지 않고 넘어가는 경우
+    combi(idx + 1, arr, cnt, k, visited)
     
-    for i in range(n):  # 현재 행의 모든 열에 대해 반복
-        for j in range(n) :
-            if not visited[i][j] :
-                arr.append((i,j))
-                visited[i][j] = True
-                combi(arr, cnt + 1, k,visited)  # 다음 행으로 이동
-                visited[i][j] = False
-                arr.pop()
+    # 현재 위치를 선택하는 경우
+    if not visited[i][j]:
+        visited[i][j] = True
+        arr.append((i, j))
+        combi(idx + 1, arr, cnt + 1, k, visited)
+        visited[i][j] = False
+        arr.pop()
     
 
 
@@ -27,7 +34,7 @@ for i in range(n) :
 m = []
 visited = [[False for _ in range(n)] for _ in range(n)]
 
-combi(m,0,k,visited)
+combi(0,m,0,k,visited)
 
 def in_range(y,x) :
     if 0<=y<=n-1 and 0<=x<=n-1 :
