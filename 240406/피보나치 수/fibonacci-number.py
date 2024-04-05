@@ -1,9 +1,11 @@
+memo = [-1] * 45
 def fibo(n) :
-    if n == 1 :
-        return 1
-    elif n == 2 :
-        return 1
+    if memo[n] != -1 :
+        return memo[n]
+    if n <= 2 :
+        memo[n] = 1
     else :
-        return fibo(n-2) + fibo(n-1)
+        memo[n] = fibo(n-1) + fibo(n-2)
+    return memo[n]
 a = int(input())
 print(fibo(a))
