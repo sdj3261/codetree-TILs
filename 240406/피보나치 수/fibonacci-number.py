@@ -1,4 +1,4 @@
-memo = [-1] * 45
+memo = [-1] * 47
 def fibo(n) :
     if memo[n] != -1 :
         return memo[n]
