@@ -1,6 +1,6 @@
 n,m = map(int,input().split())
 arr = []
-visited = [[False for _ in range(n)] for _ in range(m)]
+visited = [[False for _ in range(m)] for _ in range(n)]
 
 ret = -1
 
