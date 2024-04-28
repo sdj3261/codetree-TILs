@@ -59,7 +59,7 @@ def dfs(y,x) :
         ny = ky + y 
         nx = kx + x
 
-        if not in_range(ny,nx) or visited[ky][kx] :
+        if not in_range(ny,nx) or visited[ny][nx] :
             continue
         if arr[ky][kx] > 0 :
             dfs(ny,nx)
